@@ -1,4 +1,4 @@
-import Fields, conf, Outbound_Webhook
+import Fields, conf, Outbound_Webhook, Methods
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -34,11 +34,5 @@ def route_method():
     method_router = Methods.Method(json_payload)
     method_router.route_method()
     return 'Method Routed'
-
-
-def test_autocomplete():
-    testObj = Fields.Fields('someshite')
-    testObj.
-
 
 app.run()
