@@ -1,4 +1,6 @@
 import conf
+
+
 class Fields:
     def __init__(self, json_payload):
         self.json_payload = json_payload

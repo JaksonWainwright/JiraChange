@@ -1,11 +1,12 @@
-import requests, json, secure_conf
+import requests, json, secure_conf, conf
 from requests.auth import HTTPBasicAuth
+
 
 
 class NewOutboundWebhook:
     def __init__(self, json_payload):
         self.original_json_payload = json_payload
-        self.create_comment_url = "https://team-1584999324424.atlassian.net/rest/servicedeskapi/request/" + \
+        self.create_comment_url = conf.jiraFQDN + "/rest/servicedeskapi/request/" + \
                                   self.original_json_payload['key'] + "/comment"
         self.headers = {
             "accept": "application/json",
@@ -27,3 +28,4 @@ class NewOutboundWebhook:
         })
         requests.request("POST", self.create_comment_url, data=comment_payload, headers=self.headers,
                          auth=HTTPBasicAuth(secure_conf.username, secure_conf.api_token))
+

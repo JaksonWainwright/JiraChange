@@ -36,4 +36,9 @@ def route_method():
     return 'Method Routed'
 
 
+def test_autocomplete():
+    testObj = Fields.Fields('someshite')
+    testObj.
+
+
 app.run()
