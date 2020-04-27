@@ -1,8 +1,7 @@
 from wsgiref.util import setup_testing_defaults
 from wsgiref.simple_server import make_server
 
-# A relatively simple WSGI application. It's going to print out the
-# environment dictionary after being updated by setup_testing_defaults
+#Testing
 def simple_app(environ, start_response):
     setup_testing_defaults(environ)
 
@@ -17,3 +16,4 @@ def simple_app(environ, start_response):
 
 httpd = make_server('', 8000, simple_app)
 httpd.serve_forever()
+
