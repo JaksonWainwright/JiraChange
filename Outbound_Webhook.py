@@ -2,7 +2,6 @@ import requests, json, secure_conf, conf
 from requests.auth import HTTPBasicAuth
 
 
-
 class NewOutboundWebhook:
     def __init__(self, json_payload):
         self.original_json_payload = json_payload

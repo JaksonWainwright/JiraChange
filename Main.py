@@ -25,7 +25,7 @@ def validate_fields():
             return result
         else:
             post_validation_success_comment(json_payload)
-    return 'Validation'
+    return 'Validation passed'
 
 
 @app.route("/trigger_method", methods=['POST'])
@@ -34,5 +34,6 @@ def route_method():
     method_router = Methods.Method(json_payload)
     method_router.route_method()
     return 'Method Routed'
+
 
 app.run()

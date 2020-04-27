@@ -9,7 +9,7 @@ class Fields:
 
     def validate_ip_grammar(self):
         e = 'Error reason'
-        return conf.validation_failure
+        return conf.validation_success
 
     def validate_customfields(self):
         customfield_validation_mapper = {
