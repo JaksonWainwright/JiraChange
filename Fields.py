@@ -14,6 +14,7 @@ class Fields:
         outbound_webhook = Outbound_Webhook.NewOutboundWebhook(self.json_payload)
         outbound_webhook.create_errmsg_comment(errmsg)
 
+    # Validate IP child tasks
     def validate_ip_network(self):
         ip_data = self.ip_address.replace(" ", "").replace("\r", "").split('\n')
         for ip in ip_data:
