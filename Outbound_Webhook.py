@@ -28,3 +28,10 @@ class NewOutboundWebhook:
         requests.request("POST", self.create_comment_url, data=comment_payload, headers=self.headers,
                          auth=HTTPBasicAuth(secure_conf.username, secure_conf.api_token))
 
+    def create_errmsg_comment(self, errmsg):
+        comment_payload = json.dumps({
+            "public": True,
+            "body": str(errmsg)
+        })
+        requests.request("POST", self.create_comment_url, data=comment_payload, headers=self.headers,
+                         auth=HTTPBasicAuth(secure_conf.username, secure_conf.api_token))
