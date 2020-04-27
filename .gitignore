@@ -1,2 +1,7 @@
+__pycache__/
+bin/
+include/
+lib/
 secure_conf.py
-__pycache__
+pyvenv.cfg
+.gitignore
