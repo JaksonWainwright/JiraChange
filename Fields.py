@@ -16,8 +16,9 @@ class Fields:
 
     # Validate IP child tasks
     def validate_ip_network(self):
-        ip_data = self.ip_address.replace(" ", "").replace("\r", "").split('\n')
+        ip_data = self.ip_address.replace(" ", "/").replace("\r", "").split('\n')
         for ip in ip_data:
+            print(ip)
             try:
                 ip_network_check = ipaddress.ip_network(ip)
             except Exception as e:
@@ -26,7 +27,7 @@ class Fields:
         return conf.validation_success
 
     def validate_ip_global(self):
-        ip_data = self.ip_address.replace(" ", "").replace("\r", "").split('\n')
+        ip_data = self.ip_address.replace(" ", "/").replace("\r", "").split('\n')
         for ip in ip_data:
             try:
                 ip_network_check = ipaddress.ip_network(ip)
