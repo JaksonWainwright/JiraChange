@@ -30,11 +30,16 @@ class Fields:
                 return conf.validation_failure
         return conf.validation_success
 
-
+    def validate_ip_grammar(self):
+        validation_result_list = [self.validate_ip_network(), self.validate_ip_global()]
+        if conf.validation_failure in validation_result_list:
+            return conf.validation_failure
+        else:
+            return conf.validation_success
 
     def validate_customfields(self):
         customfield_validation_mapper = {
-            'IP-Whitelist': self.validate_ip_network()
+            'IP-Whitelist': self.validate_ip_grammar()
         }
         self.validation_results.append(customfield_validation_mapper.get(self.issue_type))
         print(self.validation_results)
