@@ -3,7 +3,6 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-
 def post_validation_success_comment(json_payload):
     outbound_webhook = Outbound_Webhook.NewOutboundWebhook(json_payload)
     outbound_webhook.create_approval_comment()
