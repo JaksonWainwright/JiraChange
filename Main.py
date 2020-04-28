@@ -7,12 +7,12 @@ app = Flask(__name__)
 # Functions for adding success or failure validation messages
 def post_validation_success_comment(json_payload):
     outbound_webhook = Outbound_Webhook.NewOutboundWebhook(json_payload)
-    outbound_webhook.create_approval_comment()
+    outbound_webhook.create_jira_approval_comment()
 
 
 def post_validation_failure_comment(json_payload):
     outbound_webhook = Outbound_Webhook.NewOutboundWebhook(json_payload)
-    outbound_webhook.create_denial_comment()
+    outbound_webhook.create_jira_denial_comment()
 
 
 # Validate route, to trigger field validation, field validation is based on ticket type

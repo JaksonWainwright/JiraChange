@@ -12,7 +12,7 @@ class Fields:
     # Function to provide ease in adding Error messages to the ticket. Just specify a string to errmsg param.
     def add_errmsg_comment(self, errmsg):
         outbound_webhook = Outbound_Webhook.NewOutboundWebhook(self.json_payload)
-        outbound_webhook.create_errmsg_comment(errmsg)
+        outbound_webhook.create_jira_errmsg_comment(errmsg)
 
     # Validate IP child tasks  / Try to instantiate the IP address as an ipaddress object with the ipaddress library
     # if fail, store exception as e
