@@ -15,6 +15,7 @@ def post_validation_failure_comment(json_payload):
     outbound_webhook.create_denial_comment()
 
 
+# Validate route, to trigger field validation, field validation is based on ticket type
 @app.route("/validate", methods=['POST'])
 def validate_fields():
     json_payload = request.get_json()
@@ -29,6 +30,7 @@ def validate_fields():
     return 'Validation passed'
 
 
+# Trigger method method, to trigger the method, based on ticket type
 @app.route("/trigger_method", methods=['POST'])
 def route_method():
     json_payload = request.get_json()

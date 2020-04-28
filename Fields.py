@@ -14,18 +14,20 @@ class Fields:
         outbound_webhook = Outbound_Webhook.NewOutboundWebhook(self.json_payload)
         outbound_webhook.create_errmsg_comment(errmsg)
 
-    # Validate IP child tasks
+    # Validate IP child tasks  / Try to instantiate the IP address as an ipaddress object with the ipaddress library
+    # if fail, store exception as e
     def validate_ip_network(self):
         ip_data = self.ip_address.replace(" ", "/").replace("\r", "").replace("//", "/").split('\n')
-        print(ip_data)
-        for ip in ip_data:
+        for ip_address in ip_data:
             try:
-                ip_network_check = ipaddress.ip_network(ip)
-            except Exception as e:
-                self.add_errmsg_comment(e)
+                ip_network_check = ipaddress.ip_network(ip_address)
+            except Exception as errmsg:
+                self.add_errmsg_comment(errmsg)
                 return conf.validation_failure
         return conf.validation_success
 
+    # Validate IP child tasks / Try to check and see if an IP is global. if global, then pass, if not, throw error
+    # and pass comment to Jira.
     def validate_ip_global(self):
         ip_data = self.ip_address.replace(" ", "/").replace("\r", "").replace("//", "/").split('\n')
         for ip in ip_data:
@@ -35,8 +37,8 @@ class Fields:
                 if not ip_is_global:
                     self.add_errmsg_comment(f'{ip} is a private IP address')
                     return conf.validation_failure
-            except Exception as e:
-                self.add_errmsg_comment(e)
+            except Exception as errmsg:
+                self.add_errmsg_comment(errmsg)
                 return conf.validation_failure
         return conf.validation_success
 
