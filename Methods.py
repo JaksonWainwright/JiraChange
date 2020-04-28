@@ -3,10 +3,12 @@ class Method:
         self.json_payload = json_payload
         self.issue_type = str(self.json_payload['fields']['issuetype']['name'])
 
-    def whitelist_ip(self):
-        self.security_scan()
-        return 'True'
+    def parse_data(self):
+        print('someshit')
 
+    def whitelist_ip(self):
+        method_functions = []
+        return 'True'
 
     def route_method(self):
         method_mapper = {
