@@ -55,6 +55,7 @@ class Fields:
     # Function to map a ticket type, to a master validation function, and append the result to the validation_results
     # list. Pass validation_results back to the main class for success/failure action
     def validate_customfields(self):
+        Outbound_Webhook.send_splunk_notice(f"Field validation started on ticket number: {self.json_payload['key']}")
         customfield_validation_mapper = {
             'IP-Whitelist': self.validate_ip_grammar()
         }
