@@ -1,3 +1,4 @@
+import Syslog_Client
 #File to contain basic information for ease of access
 
 validation_failure = 'Validation has failed. '

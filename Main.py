@@ -23,9 +23,11 @@ def validate_fields():
     validation_results = field_validator.validate_customfields()
     for result in validation_results:
         if conf.validation_failure in result:
+            Outbound_Webhook.send_splunk_warning(f"Automation Field Validation failed. Ticket number: {json_payload['key']}")
             post_validation_failure_comment(json_payload)
             return result
         else:
+            Outbound_Webhook.send_splunk_notice(f"Automation Field Validation passed. Ticket number: {json_payload['key']}")
             post_validation_success_comment(json_payload)
     return 'Validation passed'
 
