@@ -6,7 +6,7 @@ This application is to sit in between Jira Software, and any other automation pl
 
 You need to create a config file (.py) to pull variables from regarding credentials. The filename needs to be: secure_conf.py
 
-It needs to contain the following variables,  with your user specific values.
+it needs to contain the following variables,  with your user specific values.
 
 ```bash
 jira_username = 'service_account'
