@@ -3,12 +3,16 @@ class Method:
         self.json_payload = json_payload
         self.issue_type = str(self.json_payload['fields']['issuetype']['name'])
 
-    def parse_data(self):
-        print('someshit')
+    def parse_data_for_avx(self):
+        return 'Data Parsed for AVX call'
+
+    def make_avx_whitelisting_call(self):
+        return 'response to scheduled avx task'
+
 
     def whitelist_ip(self):
         method_functions = []
-        return 'True'
+        return method_functions
 
     def route_method(self):
         method_mapper = {
