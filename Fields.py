@@ -38,7 +38,7 @@ class Fields:
                     self.add_errmsg_comment(f'{ip} is a private IP address')
                     return conf.validation_failure
             except Exception as errmsg:
-                self.add_errmsg_comment(errmsg)
+                print(errmsg)
                 return conf.validation_failure
         return conf.validation_success
 
