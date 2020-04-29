@@ -1,3 +1,6 @@
+import Outbound_Webhook
+
+
 class Method:
     def __init__(self, json_payload):
         self.json_payload = json_payload
@@ -15,6 +18,7 @@ class Method:
         return method_functions
 
     def route_method(self):
+        Outbound_Webhook.send_splunk_notice(f"Automation method triggered for ticket number: {self.json_payload['key']} with an issue type of: {self.issue_type}")
         method_mapper = {
             'IP-Whitelist': self.whitelist_ip()
         }
