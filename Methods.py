@@ -1,5 +1,5 @@
-import ipaddress
 from ipaddress import IPv4Interface
+import Outbound_Webhook
 
 class Method:
     def __init__(self, json_payload):
@@ -49,6 +49,7 @@ class Method:
         return method_functions
 
     def route_method(self):
+        Outbound_Webhook.send_splunk_notice(f"Automation method triggered for ticket number: {self.json_payload['key']} with an issue type of: {self.issue_type}")
         method_mapper = {
             'IP-Whitelist': self.make_avx_whitelisting_call()
         }
