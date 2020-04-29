@@ -8,6 +8,7 @@ def send_splunk_notice(errmsg):
     log = Syslog_Client.Syslog('35.194.20.71')
     log.send(errmsg, Syslog_Client.Level.NOTICE)
 
+
 def send_splunk_warning(errmsg):
     log = Syslog_Client.Syslog('35.194.20.71')
     log.send(errmsg, Syslog_Client.Level.NOTICE)
