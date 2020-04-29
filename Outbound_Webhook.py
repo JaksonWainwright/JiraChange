@@ -1,9 +1,18 @@
-import requests, json, secure_conf, conf
+import requests, json, secure_conf, conf, Syslog_Client
 from requests.auth import HTTPBasicAuth
 
 
 # File to handle all outbound webhooks, mostly back to Jira. Possible for other places, such as Mattermost.
 # Purely for informational webhooks. Any webhooks to trigger automation need to have it
+def send_splunk_notice(errmsg):
+    log = Syslog_Client.Syslog('35.194.20.71')
+    log.send(errmsg, Syslog_Client.Level.NOTICE)
+
+def send_splunk_warning(errmsg):
+    log = Syslog_Client.Syslog('35.194.20.71')
+    log.send(errmsg, Syslog_Client.Level.NOTICE)
+
+
 class NewOutboundWebhook:
     def __init__(self, json_payload):
         self.original_json_payload = json_payload
@@ -36,3 +45,4 @@ class NewOutboundWebhook:
         })
         requests.request("POST", self.jira_comment_endpoint, data=comment_payload, headers=self.jira_reqd_headers,
                          auth=HTTPBasicAuth(secure_conf.jira_username, secure_conf.jira_api_token))
+
