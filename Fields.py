@@ -9,7 +9,7 @@ class Fields:
         self.issue_type = str(self.json_payload['fields']['issuetype']['name'])
         self.ip_address = str(self.json_payload['fields']['customfield_10065'])
 
-    # Function to provide ease in adding Error messages to the ticket. Just specify a string to errmsg param.
+
     def add_errmsg_comment(self, errmsg):
         outbound_webhook = Outbound_Webhook.NewOutboundWebhook(self.json_payload)
         outbound_webhook.create_jira_errmsg_comment(errmsg)
