@@ -21,29 +21,30 @@ class NewOutboundWebhook:
             "content-type": "application/json"
         }
 
+    def jira_request(self, request_body):
+        requests.request("POST", self.jira_comment_endpoint, data=request_body, headers=self.jira_reqd_headers,
+                         auth=HTTPBasicAuth(secure_conf.jira_username, secure_conf.jira_api_token))
+
     def create_jira_approval_comment(self):
         comment_payload = json.dumps({
             "public": True,
             "body": "Automation field validation completed. Awaiting manager approval"
         })
-        requests.request("POST", self.jira_comment_endpoint, data=comment_payload, headers=self.jira_reqd_headers,
-                         auth=HTTPBasicAuth(secure_conf.jira_username, secure_conf.jira_api_token))
+        self.jira_request(comment_payload)
 
     def create_jira_denial_comment(self):
         comment_payload = json.dumps({
             "public": True,
             "body": "Automation field validation failed. Please try again."
         })
-        requests.request("POST", self.jira_comment_endpoint, data=comment_payload, headers=self.jira_reqd_headers,
-                         auth=HTTPBasicAuth(secure_conf.jira_username, secure_conf.jira_api_token))
+        self.jira_request(comment_payload)
 
     def create_jira_comment(self, comment):
         comment_payload = json.dumps({
             "public": True,
             "body": str(comment)
         })
-        requests.request("POST", self.jira_comment_endpoint, data=comment_payload, headers=self.jira_reqd_headers,
-                         auth=HTTPBasicAuth(secure_conf.jira_username, secure_conf.jira_api_token))
+        self.jira_request(comment_payload)
 
 
 

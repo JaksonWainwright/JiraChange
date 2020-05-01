@@ -41,7 +41,9 @@ class Fields:
 
     def validate_ip_grammar(self):
         validation_results = [self.validate_ip_network(), self.validate_ip_global()]
-        if conf.validation_failure in validation_results:
+        if conf.validation_failure in validation_results[0]:
+            return conf.validation_failure
+        elif conf.validation_failure in validation_results[1:]:
             return conf.validation_failure
         else:
             return conf.validation_success
