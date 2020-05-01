@@ -9,10 +9,13 @@ class Fields:
         self.jira_comment = Outbound_Webhook.NewOutboundWebhook(self.json_payload)
         self.issue_type = str(self.json_payload['fields']['issuetype']['name'])
 
-    def validate_ip_network(self):
+    def parse_ip_customfields(self):
         ip_addresses = str(self.json_payload['fields']['customfield_10065'])
         ip_data = ip_addresses.replace(" ", "/").replace("\r", "").replace("//", "/").split('\n')
-        for ip_address in ip_data:
+        return ip_data
+
+    def validate_ip_network(self):
+        for ip_address in self.parse_ip_customfields():
             try:
                 ip_network_check = ipaddress.ip_network(ip_address)
             except Exception as errmsg:
@@ -21,9 +24,7 @@ class Fields:
         return conf.validation_success
 
     def validate_ip_global(self):
-        ip_addresses = str(self.json_payload['fields']['customfield_10065'])
-        ip_data = ip_addresses.replace(" ", "/").replace("\r", "").replace("//", "/").split('\n')
-        for ip_address in ip_data:
+        for ip_address in self.parse_ip_customfields():
             try:
                 ip_network_check = ipaddress.ip_network(ip_address)
                 ip_is_global = ip_network_check.is_global
