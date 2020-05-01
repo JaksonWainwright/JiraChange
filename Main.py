@@ -37,8 +37,8 @@ def validate_fields():
 def route_method():
     json_payload = request.get_json()
     method_router = Methods.Method(json_payload)
-    method_router.route_method()
-    return 'Method Routed'
+    method_response = method_router.route_method()
+    return method_response
 
 
 app.run()

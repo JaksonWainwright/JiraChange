@@ -1,12 +1,12 @@
 # Jira Automation Flask Application
-
-This application is to sit in between Jira, and any other automation platforms that would be used in correlation with Jira.
+   
+This application is to sit in between Jira Software, and any other automation platforms that would be used in correlation with Jira.
 
 ## Setup
 
 You need to create a config file (.py) to pull variables from regarding credentials. The filename needs to be: secure_conf.py
 
-It needs to contain the following variables,  with your user specific values.
+it needs to contain the following variables,  with your user specific values.
 
 ```bash
 jira_username = 'service_account'
