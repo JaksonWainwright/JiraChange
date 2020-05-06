@@ -54,7 +54,7 @@ class Fields:
         Outbound_Webhook.send_splunk_notice(f"Field validation started on ticket number: {self.json_payload['key']}")
         customfield_validation_mapper = {
             'IP-Whitelist': self.validate_ip_grammar()
-
+        }
         self.validation_results.append(customfield_validation_mapper.get(self.issue_type))
         print(self.validation_results)
         return self.validation_results
