@@ -1,5 +1,6 @@
 import Fields, conf, Outbound_Webhook, Methods, secure_conf
 from flask import Flask, request
+from Outbound_Webhook import Jira_Transition
 
 
 app = Flask(__name__)
@@ -14,10 +15,12 @@ def validate_fields():
         if conf.validation_failure in result:
             Outbound_Webhook.send_splunk_warning(f"Automation Field Validation failed. Ticket number: {json_payload['key']}")
             Outbound_Webhook.create_jira_denial_comment(json_payload)
+            Outbound_Webhook.push_jira_transition(json_payload, Jira_Transition.validation_failed)
             return result
         else:
             Outbound_Webhook.send_splunk_notice(f"Automation Field Validation passed. Ticket number: {json_payload['key']}")
             Outbound_Webhook.create_jira_approval_comment(json_payload)
+            Outbound_Webhook.push_jira_transition(json_payload, Jira_Transition.validation_succeeded)
     return 'Validation passed'
 
 
