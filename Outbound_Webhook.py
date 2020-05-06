@@ -12,10 +12,21 @@ def send_splunk_warning(errmsg):
     log.send(errmsg, Syslog_Client.Level.NOTICE)
 
 
+def create_jira_approval_comment(json_payload):
+    outbound_webhook = NewOutboundWebhook(json_payload)
+    outbound_webhook.create_jira_approval_comment()
+
+
+def create_jira_denial_comment(json_payload):
+    outbound_webhook = NewOutboundWebhook(json_payload)
+    outbound_webhook.create_jira_denial_comment()
+
+
 class NewOutboundWebhook:
     def __init__(self, json_payload):
         self.original_json_payload = json_payload
-        self.jira_comment_endpoint = conf.jiraFQDN + "/rest/servicedeskapi/request/" + self.original_json_payload['key'] + "/comment"
+        self.jira_comment_endpoint = conf.jiraFQDN + "/rest/servicedeskapi/request/" + self.original_json_payload[
+            'key'] + "/comment"
         self.jira_reqd_headers = {
             "accept": "application/json",
             "content-type": "application/json"
@@ -45,6 +56,3 @@ class NewOutboundWebhook:
             "body": str(comment)
         })
         self.jira_request(comment_payload)
-
-
-
