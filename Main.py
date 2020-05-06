@@ -1,17 +1,8 @@
-import Fields, conf, Outbound_Webhook, Methods
+import Fields, conf, Outbound_Webhook, Methods, secure_conf
 from flask import Flask, request
 
+
 app = Flask(__name__)
-
-
-def post_validation_success_comment(json_payload):
-    outbound_webhook = Outbound_Webhook.NewOutboundWebhook(json_payload)
-    outbound_webhook.create_jira_approval_comment()
-
-
-def post_validation_failure_comment(json_payload):
-    outbound_webhook = Outbound_Webhook.NewOutboundWebhook(json_payload)
-    outbound_webhook.create_jira_denial_comment()
 
 
 @app.route("/validate", methods=['POST'])
@@ -22,11 +13,11 @@ def validate_fields():
     for result in validation_results:
         if conf.validation_failure in result:
             Outbound_Webhook.send_splunk_warning(f"Automation Field Validation failed. Ticket number: {json_payload['key']}")
-            post_validation_failure_comment(json_payload)
+            Outbound_Webhook.create_jira_denial_comment(json_payload)
             return result
         else:
             Outbound_Webhook.send_splunk_notice(f"Automation Field Validation passed. Ticket number: {json_payload['key']}")
-            post_validation_success_comment(json_payload)
+            Outbound_Webhook.create_jira_approval_comment(json_payload)
     return 'Validation passed'
 
 
