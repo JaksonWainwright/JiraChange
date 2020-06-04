@@ -9,8 +9,6 @@ class Fields:
         self.jira_comment = Outbound_Webhook.NewOutboundWebhook(self.json_payload)
         self.issue_type = str(self.json_payload['fields']['issuetype']['name'])
 
-
-
     def parse_ip_customfields(self):
         ip_addresses = str(self.json_payload['fields']['customfield_10065'])
         ip_data = ip_addresses.replace(" ", "/").replace("\r", "").replace("//", "/").split('\n')

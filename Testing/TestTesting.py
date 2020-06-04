@@ -1,18 +1,11 @@
-import collections
-dict = {
-    1,
-    'two',
-    3,
-    4,
-    5
-}
-
-dict2 = collections.OrderedDict()
-dict2 = {1, 'two', 3, 4, 5}
+import UrlList
 
 
-#for item in dict:
-#    print(item)
+current_url_from_stupid_am = 'https://www.someshit.com/imnotgay'
 
-for item in dict2:
-    print(item)
+
+url_list = UrlList.urls
+
+for url in url_list:
+    if url in current_url_from_stupid_am:
+        print(url)
